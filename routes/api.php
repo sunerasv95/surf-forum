@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('posts')->group(function(){
     Route::get("/all", [PostController::class, "get"]);
     Route::post("/create", [PostController::class, "create"]);
+});
+
+Route::prefix('guests')->group(function(){
+    Route::post("/register", [AuthController::class, "signup"]);
+    Route::post("/login", [AuthController::class, "signin"]);
 });
