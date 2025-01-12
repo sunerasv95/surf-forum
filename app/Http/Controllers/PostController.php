@@ -18,7 +18,7 @@ class PostController extends Controller
 
     public function get()
     {
-        $posts = $this->postService->getPosts(1);
+        $posts = $this->postService->getAllPosts();
         return new PostResource($posts);
     }
 

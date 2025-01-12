@@ -53,6 +53,26 @@ class User extends Authenticatable
      */
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'user_id');
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    /**
+     * Get all of the comments for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    /**
+     * Get all of the votes for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function votes(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id');
     }
 }

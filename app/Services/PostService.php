@@ -8,10 +8,19 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PostService implements PostServiceInterface
 {
+    public function getAllPosts(): Collection
+    {
+        $posts = [];
+        $posts = Post::query()->with('author', 'category')->get();
+
+        return $posts;
+    }
+
+
     public function getPosts(int $postedUser): Collection
     {
         $posts = [];
-        $posts = Post::where('user_id', $postedUser)->limit(10)->get();
+        $posts = Post::where('author_id', $postedUser)->limit(10)->get();
 
         return $posts;
     }

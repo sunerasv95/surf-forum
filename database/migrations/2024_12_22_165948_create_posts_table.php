@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('author_id');
+            $table->foreignId('category_id');
             $table->string('topic');
-            $table->text('post_content');
+            $table->text('content');
+            $table->json("tags");
+            $table->integer("view_count");
+            $table->timestamp("last_activity")->nullable();
+            $table->boolean("is_pinned")->default(false);
             $table->timestamps();
         });
     }
