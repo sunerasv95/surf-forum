@@ -23,13 +23,21 @@ class PostService implements PostServiceInterface
         return PostResource::collection($posts);
     }
 
-    public function retrievePostsByCursor(): JsonResource
+    public function retrievePostsByCursor(
+        ?string $keyword = null,
+        ?string $category = null,
+        ?string $sortKey = null,
+    ): JsonResource
     {
+        //dd($keyword, $category, $sortKey);
         $posts = [];
-        $posts = Post::withAuthor()
+        $posts = Post::when($keyword, fn($q, $keyword) => $q->where('topic', 'ILIKE', "%$keyword%"))
+            ->when($category, fn($q, $category) => $q->whereHas('category', fn($q) => $q->where('category_slug', $category)))
+            ->withAuthor()
             ->withCategory()
             ->withCommentsCount()
-            ->cursorPaginate(5);
+            ->sortByKey($sortKey)
+            ->cursorPaginate();
 
        return PostResource::collection($posts);
     }

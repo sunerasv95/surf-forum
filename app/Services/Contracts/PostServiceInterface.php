@@ -12,7 +12,11 @@ interface PostServiceInterface
 {
     public function getAllPosts(): JsonResource;
 
-    public function retrievePostsByCursor(): JsonResource;
+    public function retrievePostsByCursor(
+        ?string $keyword = null,
+        ?string $category = null,
+        ?string $sortKey = null,
+    ): JsonResource;
 
     public function findPost(int $postedUser): Collection;
 

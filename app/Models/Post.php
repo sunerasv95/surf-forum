@@ -61,6 +61,8 @@ class Post extends Model
         return $this->morphMany(Vote::class, 'votable');
     }
 
+    // Scopes
+
     public function scopeWithAuthor(Builder $query): Builder
     {
         return $query->with("user", fn($query) => $query->select("id", "name"));
@@ -74,5 +76,23 @@ class Post extends Model
     public function scopeWithCommentsCount(Builder $query): Builder
     {
         return $query->withCount("comments as total_replies");
+    }
+
+    public function scopeSortByKey(Builder $query, ?string $key=null): Builder
+    {
+        switch ($key) {
+            case 'latest':
+                return $query->latest();
+                break;
+            case 'views':
+                return $query->orderBy('view_count', 'desc');
+                break;
+            case 'comments':
+                return $query->withCount('comments as total_comments')->orderBy('total_comments', 'desc');
+                break;
+            default:
+                return $query->latest();
+                break;
+        }
     }
 }

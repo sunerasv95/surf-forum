@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiResponser;
 use App\Http\Requests\Post\CreatePost;
+use App\Http\Requests\Post\GetPostsRequest;
 use App\Services\Contracts\PostServiceInterface;
 use Illuminate\Http\JsonResponse;
 
@@ -17,9 +18,15 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-    public function get(): JsonResponse
+    public function get(GetPostsRequest $request): JsonResponse
     {
-        $data = $this->postService->retrievePostsByCursor();
+        $request->has('search') ? $keyword = $request->search : null;
+        $request->has('cat') ? $category = $request->cat: null;
+        $request->has('sort') ? $sortKey = $request->sort : null;
+
+        //dd($keyword, $category, $sortKey);
+
+        $data = $this->postService->retrievePostsByCursor($keyword, $category, $sortKey);
         return ApiResponser::successWithPagination($data, "OK");
     }
 
