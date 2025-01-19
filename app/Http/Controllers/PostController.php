@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiResponser;
 use App\Http\Requests\Post\CreatePost;
-use App\Http\Resources\Post\PostResource;
 use App\Services\Contracts\PostServiceInterface;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+
 
 class PostController extends Controller
 {
@@ -17,10 +17,10 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-    public function get()
+    public function get(): JsonResponse
     {
-        $posts = $this->postService->getAllPosts();
-        return ApiResponser::success($posts, "OK");
+        $data = $this->postService->retrievePostsByCursor();
+        return ApiResponser::successWithPagination($data, "OK");
     }
 
     public function create(CreatePost $request)

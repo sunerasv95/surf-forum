@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use App\Services\Contracts\PostServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PostService implements PostServiceInterface
 {
@@ -19,6 +21,17 @@ class PostService implements PostServiceInterface
             ->get();
 
         return PostResource::collection($posts);
+    }
+
+    public function retrievePostsByCursor(): JsonResource
+    {
+        $posts = [];
+        $posts = Post::withAuthor()
+            ->withCategory()
+            ->withCommentsCount()
+            ->cursorPaginate(5);
+
+       return PostResource::collection($posts);
     }
 
 

@@ -4,19 +4,45 @@ namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Resources\Json\JsonResource as HttpJsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ApiResponser {
 
-    public static function success($data, $message = null, $code = 200): JsonResponse
+class ApiResponser
+{
+    public static function success($data, string $message = null, int $code = 200): JsonResponse
     {
-        if ($data instanceof HttpJsonResource) $data = $data->resolve();
-
         return response()->json([
             'status' => 'success',
             'message' => $message,
             'data' => $data,
         ], $code);
+    }
+
+    public static function successWithPagination(
+        JsonResource $data,
+        string $message = null,
+        int $code = 200
+    ): JsonResponse
+    {
+        $response = [
+            'status' => 'success',
+            'message' => $message,
+            'data' => $data,
+        ];
+
+        $paginator = $data->resource;
+
+        $response['links'] = [
+            'next' => $paginator->nextPageUrl() ?? null,
+            'previous' => $paginator->previousPageUrl() ?? null,
+        ];
+
+        $response['meta'] = [
+            'per_page' => $paginator->perPage() ?? null,
+            'count' => $paginator->count() ?? null
+        ];
+
+        return response()->json($response, $code);
     }
 
     public static function error($message, $code = 400, $errors = []): JsonResponse
