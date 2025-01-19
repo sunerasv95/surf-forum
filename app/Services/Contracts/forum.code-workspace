@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "forum",
+			"path": "../../../../forum"
+		},
+		{
+			"name": "surf-forum",
+			"path": "../../.."
+		}
+	],
+	"settings": {}
+}

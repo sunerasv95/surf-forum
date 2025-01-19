@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Post extends Model
 {
@@ -20,7 +20,6 @@ class Post extends Model
         ];
     }
 
-
     //------------------------
     //----- RELATIONSHIPS
     //------------------------
@@ -30,9 +29,9 @@ class Post extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function author(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 
@@ -43,7 +42,7 @@ class Post extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     /**
@@ -62,4 +61,18 @@ class Post extends Model
         return $this->morphMany(Vote::class, 'votable');
     }
 
+    public function scopeWithAuthor(Builder $query): Builder
+    {
+        return $query->with("user", fn($query) => $query->select("id", "name"));
+    }
+
+    public function scopeWithCategory(Builder $query): Builder
+    {
+        return $query->with("category", fn($query) => $query->select("id", "category_name"));
+    }
+
+    public function scopeWithCommentsCount(Builder $query): Builder
+    {
+        return $query->withCount("comments as total_replies");
+    }
 }

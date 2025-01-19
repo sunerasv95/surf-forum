@@ -9,6 +9,8 @@ use App\Services\Contracts\PostServiceInterface;
 use App\Services\Contracts\UserServiceInterface;
 use App\Services\PostService;
 use App\Services\UserService;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -31,5 +33,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Sanctum::usePersonalAccessTokenModel(SanctumAccessToken::class);
+        JsonResource::withoutWrapping();
+
+        Relation::enforceMorphMap(([
+            'post' => 'App\Models\Post'
+        ]));
     }
 }

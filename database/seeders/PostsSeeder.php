@@ -15,7 +15,7 @@ class PostsSeeder extends Seeder
     {
         DB::table('posts')->insert([
             [
-                'author_id' => 1,
+                'user_id' => 1,
                 'category_id' => 1,
                 'topic' => 'Best Surfing Gear for Beginners',
                 'content' => 'Let’s discuss the best surfing gear for those starting out.',
@@ -27,7 +27,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 2,
+                'user_id' => 2,
                 'category_id' => 4,
                 'topic' => 'Top Surf Destinations in 2025',
                 'content' => 'Share your favorite surf spots for this year.',
@@ -39,7 +39,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 3,
+                'user_id' => 3,
                 'category_id' => 5,
                 'topic' => 'Beginner-Friendly Beaches',
                 'content' => 'What are some great beaches for learning to surf?',
@@ -51,7 +51,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 4,
+                'user_id' => 4,
                 'category_id' => 6,
                 'topic' => 'Challenging Waves',
                 'content' => 'Discuss advanced spots with strong waves.',
@@ -63,7 +63,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 5,
+                'user_id' => 5,
                 'category_id' => 7,
                 'topic' => 'Wave Reading Basics',
                 'content' => 'Tips and tricks for reading waves effectively.',
@@ -75,7 +75,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 6,
+                'user_id' => 6,
                 'category_id' => 8,
                 'topic' => 'Improving Paddling Techniques',
                 'content' => 'How to improve paddling for better performance.',
@@ -87,7 +87,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 7,
+                'user_id' => 7,
                 'category_id' => 3,
                 'topic' => 'Choosing the Right Wetsuit',
                 'content' => 'A guide to picking the perfect wetsuit for your needs.',
@@ -99,7 +99,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 8,
+                'user_id' => 8,
                 'category_id' => 2,
                 'topic' => 'Top Surfboard Brands',
                 'content' => 'Discuss the best surfboard brands available.',
@@ -111,7 +111,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 9,
+                'user_id' => 9,
                 'category_id' => 5,
                 'topic' => 'Favorite Beginner Spots in Australia',
                 'content' => 'Share your favorite beginner surf spots in Australia.',
@@ -123,7 +123,7 @@ class PostsSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'author_id' => 10,
+                'user_id' => 10,
                 'category_id' => 9,
                 'topic' => 'Understanding Ocean Currents',
                 'content' => 'Learn how to use ocean currents to your advantage while surfing.',

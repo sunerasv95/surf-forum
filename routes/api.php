@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::prefix('posts')->group(function(){
-    Route::get("/all", [PostController::class, "get"]);
+    Route::get("/all", [PostController::class, "get"])->name('posts.all');
     Route::post("/create", [PostController::class, "create"]);
 });
 

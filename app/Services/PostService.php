@@ -2,25 +2,30 @@
 
 namespace App\Services;
 
+use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use App\Services\Contracts\PostServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostService implements PostServiceInterface
 {
-    public function getAllPosts(): Collection
+    public function getAllPosts(): JsonResource
     {
         $posts = [];
-        $posts = Post::query()->with('author', 'category')->get();
+        $posts = Post::withAuthor()
+            ->withCategory()
+            ->withCommentsCount()
+            ->get();
 
-        return $posts;
+        return PostResource::collection($posts);
     }
 
 
-    public function getPosts(int $postedUser): Collection
+    public function findPost(int $postedUser): Collection
     {
         $posts = [];
-        $posts = Post::where('author_id', $postedUser)->limit(10)->get();
+        $posts = Post::where('user_id', $postedUser)->limit(10)->get();
 
         return $posts;
     }
