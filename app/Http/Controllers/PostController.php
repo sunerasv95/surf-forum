@@ -20,6 +20,10 @@ class PostController extends Controller
 
     public function get(GetPostsRequest $request): JsonResponse
     {
+        $keyword = null;
+        $category = null;
+        $sortKey = null;
+        
         $request->has('search') ? $keyword = $request->search : null;
         $request->has('cat') ? $category = $request->cat: null;
         $request->has('sort') ? $sortKey = $request->sort : null;
