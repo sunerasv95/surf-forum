@@ -18,7 +18,6 @@ class CategoryController extends Controller
     public function get()
     {
         $data = $this->categoryService->getAllCategories();
-        return $data;
-        //return ApiResponser::success($data, "OK");
+        return ApiResponser::success($data, "OK");
     }
 }

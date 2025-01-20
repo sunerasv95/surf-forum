@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 interface CategoryServiceInterface
 {
-    public function getAllCategories();
+    public function getAllCategories(): JsonResource;
     // public function getParentCategories(): Collection;
 
     // public function getChildCategories(int $parentId): Collection;

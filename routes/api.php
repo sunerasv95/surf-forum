@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::prefix('posts')->group(function(){
-    Route::get("/all", [PostController::class, "get"])->name('posts.all');
+    Route::get("/", [PostController::class, "get"])->name('posts.all');
     //Route::post("/create", [PostController::class, "create"]);
 });
 
 Route::prefix('categories')->group(function(){
-    Route::get("/", [CategoryController::class, "get"])->name('posts.all');
+    Route::get("/", [CategoryController::class, "get"])->name('categories.all');
     //Route::post("/create", [PostController::class, "create"]);
 });
 

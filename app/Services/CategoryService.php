@@ -10,11 +10,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class CategoryService implements CategoryServiceInterface
 {
 
-    public function getAllCategories()
+    public function getAllCategories(): JsonResource
     {
         $categories = [];
         $categories = Category::withChildren()->active()->get();
-        //return $categories;
         return CategoryResource::collection($categories);
     }
 
