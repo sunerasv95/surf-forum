@@ -36,7 +36,7 @@ class CategorySeeder extends Seeder
             $mainCategoryId = DB::table('categories')->insertGetId([
                 'parent_id' => null,
                 'category_name' => $mainCategoryName,
-                'category_slug' => Str::slug($mainCategoryName, '-'),
+                'category_slug' => trim(Str::slug($mainCategoryName, '-')),
                 'is_parent' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -49,7 +49,7 @@ class CategorySeeder extends Seeder
                 $categoryData[] = [
                     'parent_id' => $mainCategoryId,
                     'category_name' => $subCategoryName,
-                    'category_slug' => Str::slug($subCategoryName, '-'),
+                    'category_slug' => trim(Str::slug($subCategoryName, '-')),
                     'is_parent' => 0,
                     'created_at' => now(),
                     'updated_at' => now(),

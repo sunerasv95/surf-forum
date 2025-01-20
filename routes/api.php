@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Route::group("/users", function(){
@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('posts')->group(function(){
     Route::get("/all", [PostController::class, "get"])->name('posts.all');
-    Route::post("/create", [PostController::class, "create"]);
+    //Route::post("/create", [PostController::class, "create"]);
+});
+
+Route::prefix('categories')->group(function(){
+    Route::get("/", [CategoryController::class, "get"])->name('posts.all');
+    //Route::post("/create", [PostController::class, "create"]);
 });
 
 Route::prefix('guests')->group(function(){

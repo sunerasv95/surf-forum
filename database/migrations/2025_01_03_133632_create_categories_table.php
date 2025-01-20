@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('parent_id')->nullable();
             $table->string("category_name");
-            $table->char("category_slug", 30);
+            $table->string("category_slug")->unique();
             $table->tinyInteger("is_parent")->default(0);
+            $table->tinyInteger("active")->default(1);
             $table->timestamps();
         });
     }

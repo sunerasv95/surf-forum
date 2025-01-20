@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Post extends Model
 {
@@ -65,12 +64,12 @@ class Post extends Model
 
     public function scopeWithAuthor(Builder $query): Builder
     {
-        return $query->with("user", fn($query) => $query->select("id", "name"));
+        return $query->with("user", fn($q) => $q->select("id", "name"));
     }
 
     public function scopeWithCategory(Builder $query): Builder
     {
-        return $query->with("category", fn($query) => $query->select("id", "category_name"));
+        return $query->with("category", fn($q) => $q->select("id", "category_name"));
     }
 
     public function scopeWithCommentsCount(Builder $query): Builder

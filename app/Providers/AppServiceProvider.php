@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Auth\Models\AccessToken as SanctumAccessToken;
 use App\Services\AuthService;
+use App\Services\CategoryService;
 use App\Services\Contracts\AuthServiceInterface;
+use App\Services\Contracts\CategoryServiceInterface;
 use App\Services\Contracts\PostServiceInterface;
 use App\Services\Contracts\UserServiceInterface;
 use App\Services\PostService;
@@ -25,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(PostServiceInterface::class, PostService::class);
-
+        $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
     }
 
     /**
