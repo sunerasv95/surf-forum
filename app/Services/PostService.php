@@ -38,7 +38,7 @@ class PostService implements PostServiceInterface
             ->withCommentsCount()
             ->sortByKey($sortKey)
             ->cursorPaginate();
-
+            
        return PostResource::collection($posts);
     }
 

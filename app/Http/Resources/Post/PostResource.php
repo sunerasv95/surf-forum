@@ -21,7 +21,7 @@ class PostResource extends JsonResource
             "tags" => $this->tags,
             "interactions" => [
                 "views_counts" => $this->view_count,
-                "total_replies" => $this->total_replies
+                "total_replies" => $this->comments_count
             ],
             "posted_at" => $this->created_at->diffForHumans()
         ];

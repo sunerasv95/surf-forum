@@ -74,7 +74,7 @@ class Post extends Model
 
     public function scopeWithCommentsCount(Builder $query): Builder
     {
-        return $query->withCount("comments as total_replies");
+        return $query->withCount("comments as comments_count");
     }
 
     public function scopeSortByKey(Builder $query, ?string $key=null): Builder
@@ -87,7 +87,7 @@ class Post extends Model
                 return $query->orderBy('view_count', 'desc');
                 break;
             case 'comments':
-                return $query->withCount('comments as total_comments')->orderBy('total_comments', 'desc');
+                return $query->orderBy('comments_count', 'desc');
                 break;
             default:
                 return $query->latest();

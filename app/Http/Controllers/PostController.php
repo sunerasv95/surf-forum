@@ -23,7 +23,7 @@ class PostController extends Controller
         $keyword = null;
         $category = null;
         $sortKey = null;
-        
+
         $request->has('search') ? $keyword = $request->search : null;
         $request->has('cat') ? $category = $request->cat: null;
         $request->has('sort') ? $sortKey = $request->sort : null;
